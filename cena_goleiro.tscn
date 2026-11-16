@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_goleiro.gd" id="1_scr"]
+[ext_resource type="Texture2D" path="res://graficos/goleiro_pixel.png" id="2_tex"]
+
+[ext_resource type="Shader" path="res://personagem.gdshader" id="8_shader"]
+[ext_resource type="Texture2D" path="res://graficos/sombra.png" id="9_sombra"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_personagem"]
+resource_local_to_scene = true
+shader = ExtResource("8_shader")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_corpo"]
+size = Vector2(50, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dano"]
+size = Vector2(64, 116)
+
+[sub_resource type="Animation" id="Animation_correndo"]
+resource_name = "correndo"
+length = 0.64
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_atacando"]
+resource_name = "atacando"
+length = 0.65
+
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1"]
+_data = {
+&"correndo": SubResource("Animation_correndo"),
+&"atacando": SubResource("Animation_atacando")
+}
+
+[node name="Goleiro" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 4
+script = ExtResource("1_scr")
+
+[node name="Sombra" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, 54)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("9_sombra")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_personagem")
+position = Vector2(0, -16)
+texture = ExtResource("2_tex")
+hframes = 8
+vframes = 2
+frame = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_corpo")
+
+[node name="AreaDano" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AreaDano"]
+shape = SubResource("RectangleShape2D_dano")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries/ = SubResource("AnimationLibrary_1")
+
+[node name="SensorChao" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-35, 40)
+target_position = Vector2(0, 40)

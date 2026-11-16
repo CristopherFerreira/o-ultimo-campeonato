@@ -1,0 +1,342 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_fase.gd" id="1_fase"]
+[ext_resource type="PackedScene" path="res://cena_plataforma.tscn" id="2_plat"]
+[ext_resource type="PackedScene" path="res://cena_gol.tscn" id="3_gol"]
+[ext_resource type="PackedScene" path="res://cena_jogador.tscn" id="4_jog"]
+[ext_resource type="PackedScene" path="res://cena_inimigo.tscn" id="5_inimigo"]
+[ext_resource type="PackedScene" path="res://cena_hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://cena_arbitro.tscn" id="7_arbitro"]
+[ext_resource type="PackedScene" path="res://cena_goleiro.tscn" id="8_goleiro"]
+[ext_resource type="PackedScene" path="res://cena_chefao.tscn" id="9_chefao"]
+[ext_resource type="PackedScene" path="res://cena_var.tscn" id="15_var"]
+[ext_resource type="PackedScene" path="res://cena_torcedor.tscn" id="16_torcedor"]
+[ext_resource type="PackedScene" path="res://cena_bandeirinha.tscn" id="17_bandeirinha"]
+[ext_resource type="PackedScene" path="res://cena_trampolim.tscn" id="18_trampolim"]
+[ext_resource type="PackedScene" path="res://cena_arame.tscn" id="19_arame"]
+[ext_resource type="PackedScene" path="res://cena_fundo.tscn" id="10_fundo"]
+[ext_resource type="PackedScene" path="res://cena_figurinha.tscn" id="11_fig"]
+[ext_resource type="PackedScene" path="res://cena_item.tscn" id="14_item"]
+[ext_resource type="Texture2D" path="res://graficos/chao_neve.png" id="12_chao"]
+[ext_resource type="Texture2D" path="res://graficos/borda_neve.png" id="13_borda"]
+[ext_resource type="Texture2D" path="res://graficos/prop_neve_boneco.png" id="p0_neve_boneco"]
+[ext_resource type="Texture2D" path="res://graficos/prop_neve_monte.png" id="p1_neve_monte"]
+[ext_resource type="Texture2D" path="res://graficos/prop_neve_pinheirinho.png" id="p2_neve_pinheirinho"]
+
+[sub_resource type="RectangleShape2D" id="Shape_chao1"]
+size = Vector2(1470, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao2"]
+size = Vector2(1000, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao3"]
+size = Vector2(900, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao4"]
+size = Vector2(1200, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_parede"]
+size = Vector2(40, 1000)
+
+[node name="Fase" type="Node2D"]
+script = ExtResource("1_fase")
+nome_fase = "QUARTAS DE FINAL"
+velocidade_inimigos = 210
+objetivo = "tempo"
+meta = 0
+tempo_limite = 60.0
+chao_escorregadio = true
+
+[node name="Fundo" parent="." instance=ExtResource("10_fundo")]
+tema = "neve"
+clima = "neve"
+cor_ceu_topo = Color(0.2, 0.25, 0.45, 1)
+cor_ceu_base = Color(0.6, 0.7, 0.85, 1)
+cor_estadio = Color(0.9, 0.93, 1, 1)
+noite = false
+astro = "sol"
+altura_astro = 0.12
+
+[node name="Chao1" type="StaticBody2D" parent="."]
+position = Vector2(565.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao1"]
+offset_left = -735.0
+offset_top = -40.0
+offset_right = 735.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao1"]
+shape = SubResource("Shape_chao1")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao1"]
+position = Vector2(-735.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao1"]
+position = Vector2(711.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao2" type="StaticBody2D" parent="."]
+position = Vector2(2300.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao2"]
+offset_left = -500.0
+offset_top = -40.0
+offset_right = 500.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao2"]
+shape = SubResource("Shape_chao2")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao2"]
+position = Vector2(-500.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao2"]
+position = Vector2(476.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao3" type="StaticBody2D" parent="."]
+position = Vector2(3750.0, 600)
+
+[node name="Grama" type="TextureRect" parent="Chao3"]
+offset_left = -450.0
+offset_top = -40.0
+offset_right = 450.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao3"]
+shape = SubResource("Shape_chao3")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao3"]
+position = Vector2(-450.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao3"]
+position = Vector2(426.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao4" type="StaticBody2D" parent="."]
+position = Vector2(5300.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao4"]
+offset_left = -600.0
+offset_top = -40.0
+offset_right = 600.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao4"]
+shape = SubResource("Shape_chao4")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao4"]
+position = Vector2(-600.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao4"]
+position = Vector2(576.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Enfeite1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(27, 550.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p0_neve_boneco")
+flip_h = false
+
+[node name="Enfeite2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(563, 577.8)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_neve_monte")
+flip_h = true
+
+[node name="Enfeite3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1121, 557.4)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p2_neve_pinheirinho")
+flip_h = true
+
+[node name="Enfeite4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1989, 550.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p0_neve_boneco")
+flip_h = false
+
+[node name="Enfeite5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2684, 557.4)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p2_neve_pinheirinho")
+flip_h = false
+
+[node name="Enfeite6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(3466, 510.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p0_neve_boneco")
+flip_h = false
+
+[node name="Enfeite7" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(3997, 537.8)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_neve_monte")
+flip_h = true
+
+[node name="Enfeite8" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(4873, 577.8)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_neve_monte")
+flip_h = true
+
+[node name="Enfeite9" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(5259, 577.8)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_neve_monte")
+flip_h = false
+
+[node name="Enfeite10" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(5803, 577.8)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_neve_monte")
+flip_h = false
+
+[node name="Plataforma1" parent="." instance=ExtResource("2_plat")]
+position = Vector2(700, 460)
+tema = "neve"
+
+[node name="Plataforma2" parent="." instance=ExtResource("2_plat")]
+position = Vector2(2300, 450)
+tema = "neve"
+
+[node name="Plataforma3" parent="." instance=ExtResource("2_plat")]
+position = Vector2(2550, 330)
+tema = "neve"
+
+[node name="Plataforma4" parent="." instance=ExtResource("2_plat")]
+position = Vector2(3700, 430)
+tema = "neve"
+
+[node name="Plataforma5" parent="." instance=ExtResource("2_plat")]
+position = Vector2(5200, 460)
+tema = "neve"
+
+[node name="PlataformaMovel1" parent="." instance=ExtResource("2_plat")]
+position = Vector2(1400, 500)
+tema = "neve"
+deslocamento = Vector2(300, 0)
+duracao = 2.2
+
+[node name="PlataformaMovel2" parent="." instance=ExtResource("2_plat")]
+position = Vector2(2900, 500)
+tema = "neve"
+deslocamento = Vector2(300, 0)
+duracao = 2.2
+
+[node name="PlataformaMovel3" parent="." instance=ExtResource("2_plat")]
+position = Vector2(4300, 490)
+tema = "neve"
+deslocamento = Vector2(300, 0)
+duracao = 2.2
+
+[node name="Figurinha1" parent="." instance=ExtResource("11_fig")]
+position = Vector2(2550, 260)
+
+[node name="Figurinha2" parent="." instance=ExtResource("11_fig")]
+position = Vector2(3700, 360)
+
+[node name="Item1" parent="." instance=ExtResource("14_item")]
+position = Vector2(700, 400)
+tipo = "bola"
+
+[node name="Item2" parent="." instance=ExtResource("14_item")]
+position = Vector2(2000, 560)
+tipo = "bola"
+
+[node name="Item3" parent="." instance=ExtResource("14_item")]
+position = Vector2(4800, 560)
+tipo = "bola"
+
+[node name="Item4" parent="." instance=ExtResource("14_item")]
+position = Vector2(5200, 400)
+tipo = "vida"
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="."]
+position = Vector2(-170, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeEsquerda"]
+shape = SubResource("Shape_parede")
+
+[node name="ParedeDireita" type="StaticBody2D" parent="."]
+position = Vector2(5900, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeDireita"]
+shape = SubResource("Shape_parede")
+
+[node name="Gol" parent="." instance=ExtResource("3_gol")]
+position = Vector2(5650, 525)
+
+[node name="Jogador" parent="." instance=ExtResource("4_jog")]
+position = Vector2(250, 480)
+
+[node name="Inimigo1" parent="." instance=ExtResource("7_arbitro")]
+position = Vector2(900, 530)
+
+[node name="Inimigo2" parent="." instance=ExtResource("8_goleiro")]
+position = Vector2(2200, 530)
+
+[node name="Inimigo3" parent="." instance=ExtResource("17_bandeirinha")]
+position = Vector2(2450, 530)
+
+[node name="Inimigo4" parent="." instance=ExtResource("5_inimigo")]
+position = Vector2(2600, 530)
+
+[node name="Inimigo5" parent="." instance=ExtResource("7_arbitro")]
+position = Vector2(3800, 490)
+
+[node name="Inimigo6" parent="." instance=ExtResource("15_var")]
+position = Vector2(4450, 360)
+
+[node name="Inimigo7" parent="." instance=ExtResource("8_goleiro")]
+position = Vector2(5100, 530)
+
+[node name="Inimigo8" parent="." instance=ExtResource("5_inimigo")]
+position = Vector2(5500, 530)
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[connection signal="body_entered" from="Gol" to="." method="_on_gol_body_entered"]

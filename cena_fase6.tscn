@@ -1,0 +1,398 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_fase.gd" id="1_fase"]
+[ext_resource type="PackedScene" path="res://cena_plataforma.tscn" id="2_plat"]
+[ext_resource type="PackedScene" path="res://cena_gol.tscn" id="3_gol"]
+[ext_resource type="PackedScene" path="res://cena_jogador.tscn" id="4_jog"]
+[ext_resource type="PackedScene" path="res://cena_inimigo.tscn" id="5_inimigo"]
+[ext_resource type="PackedScene" path="res://cena_hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://cena_arbitro.tscn" id="7_arbitro"]
+[ext_resource type="PackedScene" path="res://cena_goleiro.tscn" id="8_goleiro"]
+[ext_resource type="PackedScene" path="res://cena_chefao.tscn" id="9_chefao"]
+[ext_resource type="PackedScene" path="res://cena_var.tscn" id="15_var"]
+[ext_resource type="PackedScene" path="res://cena_torcedor.tscn" id="16_torcedor"]
+[ext_resource type="PackedScene" path="res://cena_bandeirinha.tscn" id="17_bandeirinha"]
+[ext_resource type="PackedScene" path="res://cena_trampolim.tscn" id="18_trampolim"]
+[ext_resource type="PackedScene" path="res://cena_arame.tscn" id="19_arame"]
+[ext_resource type="PackedScene" path="res://cena_fundo.tscn" id="10_fundo"]
+[ext_resource type="PackedScene" path="res://cena_figurinha.tscn" id="11_fig"]
+[ext_resource type="PackedScene" path="res://cena_item.tscn" id="14_item"]
+[ext_resource type="Texture2D" path="res://graficos/grama.png" id="12_chao"]
+[ext_resource type="Texture2D" path="res://graficos/borda_estadio.png" id="13_borda"]
+[ext_resource type="Texture2D" path="res://graficos/prop_estadio_camera.png" id="p0_estadio_camera"]
+[ext_resource type="Texture2D" path="res://graficos/prop_estadio_cones.png" id="p1_estadio_cones"]
+[ext_resource type="Texture2D" path="res://graficos/prop_estadio_escanteio.png" id="p2_estadio_escanteio"]
+[ext_resource type="Texture2D" path="res://graficos/prop_estadio_isopor.png" id="p3_estadio_isopor"]
+
+[sub_resource type="RectangleShape2D" id="Shape_chao1"]
+size = Vector2(1270, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao2"]
+size = Vector2(1050, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao3"]
+size = Vector2(950, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao4"]
+size = Vector2(850, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_chao5"]
+size = Vector2(1770, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_parede"]
+size = Vector2(40, 1000)
+
+[node name="Fase" type="Node2D"]
+script = ExtResource("1_fase")
+nome_fase = "A GRANDE FINAL"
+velocidade_inimigos = 280
+objetivo = "chefao"
+meta = 0
+tempo_limite = 60.0
+chao_escorregadio = false
+
+[node name="Fundo" parent="." instance=ExtResource("10_fundo")]
+tema = "estadio"
+clima = "nenhum"
+cor_ceu_topo = Color(0.01, 0.02, 0.08, 1)
+cor_ceu_base = Color(0.08, 0.1, 0.25, 1)
+cor_estadio = Color(0.6, 0.62, 0.78, 1)
+noite = true
+astro = "lua"
+altura_astro = 0.08
+
+[node name="Chao1" type="StaticBody2D" parent="."]
+position = Vector2(465.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao1"]
+offset_left = -635.0
+offset_top = -40.0
+offset_right = 635.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao1"]
+shape = SubResource("Shape_chao1")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao1"]
+position = Vector2(-635.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao1"]
+position = Vector2(611.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao2" type="StaticBody2D" parent="."]
+position = Vector2(1875.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao2"]
+offset_left = -525.0
+offset_top = -40.0
+offset_right = 525.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao2"]
+shape = SubResource("Shape_chao2")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao2"]
+position = Vector2(-525.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao2"]
+position = Vector2(501.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao3" type="StaticBody2D" parent="."]
+position = Vector2(3125.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao3"]
+offset_left = -475.0
+offset_top = -40.0
+offset_right = 475.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao3"]
+shape = SubResource("Shape_chao3")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao3"]
+position = Vector2(-475.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao3"]
+position = Vector2(451.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao4" type="StaticBody2D" parent="."]
+position = Vector2(4275.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao4"]
+offset_left = -425.0
+offset_top = -40.0
+offset_right = 425.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao4"]
+shape = SubResource("Shape_chao4")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao4"]
+position = Vector2(-425.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao4"]
+position = Vector2(401.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Chao5" type="StaticBody2D" parent="."]
+position = Vector2(5835.0, 640)
+
+[node name="Grama" type="TextureRect" parent="Chao5"]
+offset_left = -885.0
+offset_top = -40.0
+offset_right = 885.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("12_chao")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao5"]
+shape = SubResource("Shape_chao5")
+
+[node name="BordaEsquerda" type="Sprite2D" parent="Chao5"]
+position = Vector2(-885.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+
+[node name="BordaDireita" type="Sprite2D" parent="Chao5"]
+position = Vector2(861.0, -40)
+texture = ExtResource("13_borda")
+centered = false
+flip_h = true
+
+[node name="Enfeite1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-38, 579.0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_estadio_cones")
+flip_h = false
+
+[node name="Enfeite2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(604, 546.6)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p0_estadio_camera")
+flip_h = false
+
+[node name="Enfeite3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1549, 579.0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_estadio_cones")
+flip_h = true
+
+[node name="Enfeite4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2137, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = false
+
+[node name="Enfeite5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2806, 579.0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p1_estadio_cones")
+flip_h = true
+
+[node name="Enfeite6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(3189, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = true
+
+[node name="Enfeite7" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(3960, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = true
+
+[node name="Enfeite8" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(4595, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = false
+
+[node name="Enfeite9" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(5060, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = true
+
+[node name="Enfeite10" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(5536, 546.6)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p0_estadio_camera")
+flip_h = false
+
+[node name="Enfeite11" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6181, 568.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p3_estadio_isopor")
+flip_h = true
+
+[node name="Escanteio" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6650, 543)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("p2_estadio_escanteio")
+
+[node name="Plataforma1" parent="." instance=ExtResource("2_plat")]
+position = Vector2(1225, 470)
+tema = "estadio"
+
+[node name="Plataforma2" parent="." instance=ExtResource("2_plat")]
+position = Vector2(1900, 440)
+tema = "estadio"
+
+[node name="Plataforma3" parent="." instance=ExtResource("2_plat")]
+position = Vector2(2525, 470)
+tema = "estadio"
+
+[node name="Plataforma4" parent="." instance=ExtResource("2_plat")]
+position = Vector2(3100, 420)
+tema = "estadio"
+
+[node name="Plataforma5" parent="." instance=ExtResource("2_plat")]
+position = Vector2(3725, 470)
+tema = "estadio"
+
+[node name="Plataforma6" parent="." instance=ExtResource("2_plat")]
+position = Vector2(4300, 430)
+tema = "estadio"
+
+[node name="Plataforma7" parent="." instance=ExtResource("2_plat")]
+position = Vector2(4825, 470)
+tema = "estadio"
+
+[node name="Figurinha1" parent="." instance=ExtResource("11_fig")]
+position = Vector2(3100, 350)
+
+[node name="Figurinha2" parent="." instance=ExtResource("11_fig")]
+position = Vector2(4300, 360)
+
+[node name="Item1" parent="." instance=ExtResource("14_item")]
+position = Vector2(500, 560)
+tipo = "bola"
+
+[node name="Item2" parent="." instance=ExtResource("14_item")]
+position = Vector2(1900, 380)
+tipo = "bola"
+
+[node name="Item3" parent="." instance=ExtResource("14_item")]
+position = Vector2(2525, 410)
+tipo = "bola"
+
+[node name="Item4" parent="." instance=ExtResource("14_item")]
+position = Vector2(3725, 410)
+tipo = "vida"
+
+[node name="Item5" parent="." instance=ExtResource("14_item")]
+position = Vector2(4825, 410)
+tipo = "bola"
+
+[node name="Item6" parent="." instance=ExtResource("14_item")]
+position = Vector2(5400, 560)
+tipo = "bola"
+
+[node name="Item7" parent="." instance=ExtResource("14_item")]
+position = Vector2(5200, 560)
+tipo = "vida"
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="."]
+position = Vector2(-170, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeEsquerda"]
+shape = SubResource("Shape_parede")
+
+[node name="ParedeDireita" type="StaticBody2D" parent="."]
+position = Vector2(6720, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeDireita"]
+shape = SubResource("Shape_parede")
+
+[node name="Gol" parent="." instance=ExtResource("3_gol")]
+position = Vector2(6450, 525)
+tipo = "portao"
+
+[node name="Jogador" parent="." instance=ExtResource("4_jog")]
+position = Vector2(250, 480)
+
+[node name="Inimigo1" parent="." instance=ExtResource("5_inimigo")]
+position = Vector2(800, 530)
+
+[node name="Inimigo2" parent="." instance=ExtResource("7_arbitro")]
+position = Vector2(1700, 530)
+
+[node name="Inimigo3" parent="." instance=ExtResource("15_var")]
+position = Vector2(2000, 330)
+
+[node name="Inimigo4" parent="." instance=ExtResource("8_goleiro")]
+position = Vector2(2100, 530)
+
+[node name="Inimigo5" parent="." instance=ExtResource("5_inimigo")]
+position = Vector2(3000, 530)
+
+[node name="Inimigo6" parent="." instance=ExtResource("7_arbitro")]
+position = Vector2(3300, 530)
+
+[node name="Inimigo7" parent="." instance=ExtResource("16_torcedor")]
+position = Vector2(3725, 385)
+
+[node name="Inimigo8" parent="." instance=ExtResource("17_bandeirinha")]
+position = Vector2(4000, 530)
+
+[node name="Inimigo9" parent="." instance=ExtResource("8_goleiro")]
+position = Vector2(4300, 530)
+
+[node name="Inimigo10" parent="." instance=ExtResource("5_inimigo")]
+position = Vector2(4500, 530)
+
+[node name="Chefao" parent="." instance=ExtResource("9_chefao")]
+position = Vector2(6000, 480)
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[connection signal="body_entered" from="Gol" to="." method="_on_gol_body_entered"]

@@ -1,0 +1,126 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_campeao.gd" id="1_camp"]
+[ext_resource type="Theme" path="res://tema.tres" id="2_tema"]
+[ext_resource type="Texture2D" path="res://graficos/jogador_pixel.png" id="3_jog"]
+
+[ext_resource type="PackedScene" path="res://cena_fundo.tscn" id="4_fundo"]
+[ext_resource type="Texture2D" path="res://graficos/grama.png" id="5_grama"]
+
+[ext_resource type="Shader" path="res://personagem.gdshader" id="6_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jogador"]
+shader = ExtResource("6_shader")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_comemora"]
+atlas = ExtResource("3_jog")
+region = Rect2(62, 722, 85, 139)
+
+[sub_resource type="Gradient" id="Gradient_confete"]
+offsets = PackedFloat32Array(0, 0.33, 0.66, 1)
+colors = PackedColorArray(1, 0.84, 0.1, 1, 0.2, 0.75, 0.3, 1, 0.25, 0.45, 1, 1, 1, 1, 1, 1)
+
+[node name="Campeao" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tema")
+script = ExtResource("1_camp")
+
+[node name="Fundo" parent="." instance=ExtResource("4_fundo")]
+ola_automatica = true
+vinheta = false
+astro = "lua"
+altura_astro = 0.1
+cor_ceu_topo = Color(0.01, 0.02, 0.08, 1)
+cor_ceu_base = Color(0.08, 0.1, 0.25, 1)
+cor_estadio = Color(0.6, 0.62, 0.78, 1)
+noite = true
+
+[node name="Gramado" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_grama")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Escurecer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.35)
+
+[node name="Confete" type="CPUParticles2D" parent="."]
+position = Vector2(576, -20)
+amount = 160
+lifetime = 4.0
+preprocess = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(700, 10)
+direction = Vector2(0, 1)
+spread = 30.0
+gravity = Vector2(0, 120)
+initial_velocity_min = 40.0
+initial_velocity_max = 140.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+scale_amount_min = 5.0
+scale_amount_max = 9.0
+color_initial_ramp = SubResource("Gradient_confete")
+
+[node name="Centro" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Coluna" type="VBoxContainer" parent="Centro"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Titulo" type="Label" parent="Centro/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_constants/outline_size = 18
+theme_override_font_sizes/font_size = 72
+text = "CAMPEÃO DO MUNDO!"
+horizontal_alignment = 1
+
+[node name="Jogador" type="TextureRect" parent="Centro/Coluna"]
+texture_filter = 2
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jogador")
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+texture = SubResource("AtlasTexture_comemora")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Pontos" type="Label" parent="Centro/Coluna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Pontuação final: 0"
+horizontal_alignment = 1
+
+[node name="VoltarMenu" type="Button" parent="Centro/Coluna"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "VOLTAR AO MENU"

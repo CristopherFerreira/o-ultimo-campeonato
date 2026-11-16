@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_gol.gd" id="1_scr"]
+[ext_resource type="Texture2D" path="res://graficos/gol.png" id="1_tex"]
+[ext_resource type="Texture2D" path="res://graficos/cadeado.png" id="2_tex"]
+[ext_resource type="Texture2D" path="res://graficos/portao_fachada.png" id="3_fachada"]
+[ext_resource type="Texture2D" path="res://graficos/portao_grade.png" id="4_grade"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gol"]
+size = Vector2(100, 150)
+
+[node name="Gol" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_scr")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(-20, -80)
+texture = ExtResource("1_tex")
+centered = false
+
+[node name="Fachada" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(-60, -155)
+texture = ExtResource("3_fachada")
+centered = false
+
+[node name="Grade" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(-10, -95)
+texture = ExtResource("4_grade")
+centered = false
+
+[node name="Cadeado" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(50, -10)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(60, 0)
+shape = SubResource("RectangleShape2D_gol")

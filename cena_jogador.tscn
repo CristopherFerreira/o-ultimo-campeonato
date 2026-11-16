@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://dko04rw3aw0qo"]
+
+[ext_resource type="Script" uid="uid://cy0iixbud3gru" path="res://script_personagem.gd" id="1_xgtec"]
+[ext_resource type="Texture2D" path="res://graficos/jogador_pixel.png" id="2_xgtec"]
+
+[ext_resource type="Shader" path="res://personagem.gdshader" id="3_shader"]
+[ext_resource type="Texture2D" path="res://graficos/sombra.png" id="4_sombra"]
+[ext_resource type="Texture2D" path="res://graficos/particula.png" id="5_part"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jogador"]
+resource_local_to_scene = true
+shader = ExtResource("3_shader")
+
+[sub_resource type="CanvasItemMaterial" id="Material_fogo"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_fogo"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 0.6, 1, 1, 0.55, 0.1, 0.9, 0.8, 0.1, 0.05, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64uw6"]
+size = Vector2(50, 112)
+
+[sub_resource type="Animation" id="Animation_skl0v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3qw1q"]
+resource_name = "carrinho"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_otaft"]
+resource_name = "chutando"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_e2p6x"]
+resource_name = "correndo"
+length = 0.6
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_63raq"]
+resource_name = "parado"
+length = 1.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_5gxcy"]
+resource_name = "pulando"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ablbj"]
+_data = {
+&"RESET": SubResource("Animation_skl0v"),
+&"carrinho": SubResource("Animation_3qw1q"),
+&"chutando": SubResource("Animation_otaft"),
+&"correndo": SubResource("Animation_e2p6x"),
+&"parado": SubResource("Animation_63raq"),
+&"pulando": SubResource("Animation_5gxcy")
+}
+
+[node name="Jogador" type="Node2D" unique_id=297150345]
+position = Vector2(563, 329)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1443315958]
+position = Vector2(0, -1)
+collision_layer = 2
+script = ExtResource("1_xgtec")
+
+[node name="Sombra" type="Sprite2D" parent="CharacterBody2D"]
+top_level = true
+modulate = Color(1, 1, 1, 0.8)
+texture = ExtResource("4_sombra")
+
+[node name="FogoSuper" type="CPUParticles2D" parent="CharacterBody2D"]
+material = SubResource("Material_fogo")
+position = Vector2(0, 10)
+emitting = false
+amount = 50
+lifetime = 0.6
+texture = ExtResource("5_part")
+emission_shape = 3
+emission_rect_extents = Vector2(24, 50)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_fogo")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1837001489]
+material = SubResource("ShaderMaterial_jogador")
+texture_filter = 2
+position = Vector2(3, -15)
+texture = ExtResource("2_xgtec")
+hframes = 6
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=352200697]
+position = Vector2(3, 1)
+shape = SubResource("RectangleShape2D_64uw6")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=273569552]
+
+[node name="Marker2D" type="Marker2D" parent="CharacterBody2D" unique_id=312183149]
+position = Vector2(49, 38)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=1418428681]
+libraries/ = SubResource("AnimationLibrary_ablbj")

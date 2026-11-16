@@ -1,0 +1,142 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_gameover.gd" id="1_scr"]
+[ext_resource type="Theme" path="res://tema.tres" id="2_tema"]
+[ext_resource type="PackedScene" path="res://cena_fundo.tscn" id="3_fundo"]
+[ext_resource type="Texture2D" path="res://graficos/grama.png" id="4_grama"]
+[ext_resource type="Texture2D" path="res://graficos/jogador_pixel.png" id="5_jog"]
+[ext_resource type="Shader" path="res://personagem.gdshader" id="6_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jogador"]
+shader = ExtResource("6_shader")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_caido"]
+atlas = ExtResource("5_jog")
+region = Rect2(633, 623, 133, 94)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cartao"]
+content_margin_left = 40.0
+content_margin_top = 20.0
+content_margin_right = 40.0
+content_margin_bottom = 24.0
+bg_color = Color(0.12, 0.02, 0.02, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.2, 0.2, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tema")
+script = ExtResource("1_scr")
+
+[node name="Fundo" parent="." instance=ExtResource("3_fundo")]
+cor_ceu_topo = Color(0.05, 0.01, 0.02, 1)
+cor_ceu_base = Color(0.25, 0.05, 0.08, 1)
+cor_estadio = Color(0.45, 0.35, 0.4, 1)
+noite = true
+astro = "lua"
+altura_astro = 0.12
+vinheta = false
+
+[node name="Gramado" type="TextureRect" parent="."]
+modulate = Color(0.55, 0.5, 0.5, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("4_grama")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Escurecer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1, 0, 0, 0.45)
+
+[node name="Centro" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Painel" type="PanelContainer" parent="Centro"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cartao")
+
+[node name="Coluna" type="VBoxContainer" parent="Centro/Painel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Titulo" type="Label" parent="Centro/Painel/Coluna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.25, 0.2, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 76
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Jogador" type="TextureRect" parent="Centro/Painel/Coluna"]
+texture_filter = 2
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jogador")
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+texture = SubResource("AtlasTexture_caido")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Fase" type="Label" parent="Centro/Painel/Coluna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Eliminado na fase: FASE DE GRUPOS"
+horizontal_alignment = 1
+
+[node name="Pontos" type="Label" parent="Centro/Painel/Coluna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Pontuação: 0"
+horizontal_alignment = 1
+
+[node name="Botoes" type="HBoxContainer" parent="Centro/Painel/Coluna"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TentarDeNovo" type="Button" parent="Centro/Painel/Coluna/Botoes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+text = "TENTAR DE NOVO"
+
+[node name="Menu" type="Button" parent="Centro/Painel/Coluna/Botoes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 56)
+layout_mode = 2
+text = "MENU"

@@ -1,0 +1,1068 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://tema.tres" id="2_tema"]
+[ext_resource type="Texture2D" path="res://graficos/jogador_pixel.png" id="3_jog"]
+[ext_resource type="PackedScene" path="res://cena_fundo.tscn" id="4_fundo"]
+[ext_resource type="Texture2D" path="res://graficos/grama.png" id="5_grama"]
+[ext_resource type="Texture2D" path="res://graficos/arbitro_pixel.png" id="6_arb"]
+[ext_resource type="Texture2D" path="res://graficos/goleiro_pixel.png" id="7_gol"]
+[ext_resource type="Texture2D" path="res://graficos/chefao_pixel.png" id="8_chefe"]
+[ext_resource type="Shader" path="res://personagem.gdshader" id="9_shader"]
+[ext_resource type="PackedScene" path="res://cena_volume.tscn" id="10_volume"]
+[ext_resource type="Texture2D" path="res://graficos/var_pixel.png" id="11_var"]
+[ext_resource type="Texture2D" path="res://graficos/torcedor_pixel.png" id="12_torc"]
+[ext_resource type="Texture2D" path="res://graficos/bandeirinha_pixel.png" id="13_band"]
+[ext_resource type="Texture2D" path="res://graficos/logo_titulo.png" id="14_logo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jogador"]
+shader = ExtResource("9_shader")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chute"]
+atlas = ExtResource("3_jog")
+region = Rect2(462, 290, 85, 139)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arbitro"]
+atlas = ExtResource("6_arb")
+region = Rect2(33, 297, 57, 133)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_goleiro"]
+atlas = ExtResource("7_gol")
+region = Rect2(63, 164, 75, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chefao"]
+atlas = ExtResource("8_chefe")
+region = Rect2(20, 71, 204, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_var"]
+atlas = ExtResource("11_var")
+region = Rect2(294, 5, 80, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_torcedor"]
+atlas = ExtResource("12_torc")
+region = Rect2(33, 8, 67, 133)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bandeirinha"]
+atlas = ExtResource("13_band")
+region = Rect2(38, 9, 60, 132)
+
+[sub_resource type="Gradient" id="Gradient_escurecer"]
+offsets = PackedFloat32Array(0, 0.28, 0.65, 1)
+colors = PackedColorArray(0, 0, 0, 0.55, 0, 0, 0, 0.1, 0, 0, 0, 0.3, 0, 0, 0, 0.8)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_escurecer"]
+gradient = SubResource("Gradient_escurecer")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_vinheta"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.15, 0, 0, 0, 0.6)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vinheta"]
+gradient = SubResource("Gradient_vinheta")
+fill = 1
+fill_from = Vector2(0.5, 0.45)
+fill_to = Vector2(1.05, 1.05)
+
+[sub_resource type="Gradient" id="Gradient_holofote"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(1, 0.92, 0.55, 0.38, 1, 0.85, 0.3, 0.1, 1, 0.85, 0.3, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_holofote"]
+gradient = SubResource("Gradient_holofote")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_pedestal"]
+offsets = PackedFloat32Array(0, 0.7, 1)
+colors = PackedColorArray(0, 0, 0, 0.55, 0, 0, 0, 0.35, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pedestal"]
+gradient = SubResource("Gradient_pedestal")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cartao"]
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.03, 0.08, 0.05, 0.86)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 0.55)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 14
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fita"]
+content_margin_left = 26.0
+content_margin_top = 4.0
+content_margin_right = 26.0
+content_margin_bottom = 6.0
+bg_color = Color(0.07, 0.45, 0.2, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_placa"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.01, 0.02, 0.02, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seta"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.84, 0.1, 0.12)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 0.9)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seta_hover"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.84, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jogar"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.13, 0.68, 0.3, 1)
+border_width_bottom = 6
+border_color = Color(0.04, 0.36, 0.13, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.2, 0.9, 0.4, 0.35)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jogar_hover"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.22, 0.82, 0.4, 1)
+border_width_bottom = 6
+border_color = Color(0.04, 0.36, 0.13, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.3, 1, 0.5, 0.5)
+shadow_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sec"]
+content_margin_left = 20.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(0.03, 0.08, 0.05, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 0.85)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sec_hover"]
+content_margin_left = 20.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.84, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_foco"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_figurinha"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(0.97, 0.95, 0.88, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_figurinha_ouro"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(1, 0.8, 0.22, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(1, 0.6, 0, 0.5)
+shadow_size = 7
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_foto"]
+bg_color = Color(0.16, 0.5, 0.27, 1)
+border_width_bottom = 3
+border_color = Color(0.1, 0.36, 0.18, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_foto_chefe"]
+bg_color = Color(0.45, 0.06, 0.08, 1)
+border_width_bottom = 3
+border_color = Color(0.28, 0.02, 0.04, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tecla"]
+content_margin_left = 8.0
+content_margin_top = 1.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(1, 1, 1, 0.14)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.35)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tema")
+script = ExtResource("1_menu")
+
+[node name="Fundo" parent="." instance=ExtResource("4_fundo")]
+ola_automatica = true
+cor_ceu_topo = Color(0.16, 0.18, 0.42, 1)
+cor_ceu_base = Color(0.95, 0.5, 0.35, 1)
+cor_estadio = Color(1, 0.82, 0.72, 1)
+astro = "sol"
+altura_astro = 0.3
+vinheta = false
+
+[node name="Gramado" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("5_grama")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Escurecer" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_escurecer")
+expand_mode = 1
+
+[node name="Vinheta" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vinheta")
+expand_mode = 1
+
+[node name="Margem" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 10
+
+[node name="Coluna" type="VBoxContainer" parent="Margem"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Titulo" type="TextureRect" parent="Margem/Coluna"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+texture = ExtResource("14_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FaixaSub" type="CenterContainer" parent="Margem/Coluna"]
+layout_mode = 2
+
+[node name="Fita" type="PanelContainer" parent="Margem/Coluna/FaixaSub"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fita")
+
+[node name="Subtitulo" type="Label" parent="Margem/Coluna/FaixaSub/Fita"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 19
+text = "Leve sua seleção até a taça da Copa do Mundo!"
+horizontal_alignment = 1
+
+[node name="Meio" type="HBoxContainer" parent="Margem/Coluna"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="CartaoSelecao" type="PanelContainer" parent="Margem/Coluna/Meio"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cartao")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoSelecao"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Rotulo" type="Label" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 17
+text = "SUA SELEÇÃO"
+horizontal_alignment = 1
+
+[node name="Palco" type="Control" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna"]
+custom_minimum_size = Vector2(0, 196)
+layout_mode = 2
+
+[node name="Holofote" type="TextureRect" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -110.0
+offset_right = 110.0
+offset_bottom = 110.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_holofote")
+expand_mode = 1
+
+[node name="Pedestal" type="TextureRect" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -24.0
+offset_right = 80.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_pedestal")
+expand_mode = 1
+
+[node name="Escolha" type="HBoxContainer" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SelecaoAnterior" type="Button" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco/Escolha"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_colors/font_focus_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_seta")
+theme_override_styles/hover = SubResource("StyleBoxFlat_seta_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_seta_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = "<"
+
+[node name="Jogador" type="TextureRect" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco/Escolha"]
+texture_filter = 2
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jogador")
+custom_minimum_size = Vector2(170, 190)
+layout_mode = 2
+texture = SubResource("AtlasTexture_chute")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelecaoProxima" type="Button" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Palco/Escolha"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_colors/font_focus_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_seta")
+theme_override_styles/hover = SubResource("StyleBoxFlat_seta_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_seta_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = ">"
+
+[node name="Placa" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(200, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_placa")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Placa"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="NomeSelecao" type="Label" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Placa/Coluna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "BRASIL"
+horizontal_alignment = 1
+
+[node name="Cores" type="HBoxContainer" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Placa/Coluna"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="CorCamisa" type="ColorRect" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Placa/Coluna/Cores"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 8)
+layout_mode = 2
+
+[node name="CorDetalhe" type="ColorRect" parent="Margem/Coluna/Meio/CartaoSelecao/Coluna/Placa/Coluna/Cores"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 8)
+layout_mode = 2
+
+[node name="Botoes" type="VBoxContainer" parent="Margem/Coluna/Meio"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="Jogar" type="Button" parent="Margem/Coluna/Meio/Botoes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 84)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0.28, 0.1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_jogar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jogar_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jogar")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = "JOGAR"
+
+[node name="ComoJogar" type="Button" parent="Margem/Coluna/Meio/Botoes"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(260, 52)
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_sec")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = "COMO JOGAR"
+
+[node name="Opcoes" type="Button" parent="Margem/Coluna/Meio/Botoes"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(260, 52)
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_sec")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = "OPÇÕES"
+
+[node name="Sair" type="Button" parent="Margem/Coluna/Meio/Botoes"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(260, 52)
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.84, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.2, 0.08, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_sec")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sec_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_foco")
+text = "SAIR"
+
+[node name="CartaoDireita" type="PanelContainer" parent="Margem/Coluna/Meio"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cartao")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RotuloAdversarios" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 17
+text = "ÁLBUM DOS ADVERSÁRIOS"
+horizontal_alignment = 1
+
+[node name="Adversarios" type="GridContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Arbitro" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Arbitro"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Arbitro/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Arbitro/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_arbitro")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Arbitro/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.12, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "ÁRBITRO"
+horizontal_alignment = 1
+
+[node name="Goleiro" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Goleiro"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Goleiro/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Goleiro/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_goleiro")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Goleiro/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.12, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "GOLEIRO"
+horizontal_alignment = 1
+
+[node name="Chefao" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha_ouro")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Chefao"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Chefao/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto_chefe")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Chefao/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_chefao")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Chefao/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.05, 0.05, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "CHEFÃO"
+horizontal_alignment = 1
+
+[node name="Var" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Var"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Var/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Var/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_var")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Var/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.12, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "VAR"
+horizontal_alignment = 1
+
+[node name="Torcedor" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Torcedor"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Torcedor/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Torcedor/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_torcedor")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Torcedor/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.12, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "TORCEDOR"
+horizontal_alignment = 1
+
+[node name="Bandeirinha" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figurinha")
+
+[node name="Coluna" type="VBoxContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Bandeirinha"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Moldura" type="PanelContainer" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Bandeirinha/Coluna"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_foto")
+
+[node name="Foto" type="TextureRect" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Bandeirinha/Coluna/Moldura"]
+texture_filter = 2
+custom_minimum_size = Vector2(74, 76)
+layout_mode = 2
+texture = SubResource("AtlasTexture_bandeirinha")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nome" type="Label" parent="Margem/Coluna/Meio/CartaoDireita/Coluna/Adversarios/Bandeirinha/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.12, 0.1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "BANDEIRINHA"
+horizontal_alignment = 1
+
+[node name="Rodape" type="HBoxContainer" parent="Margem/Coluna"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Tecla0" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla0"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla0/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "A / D"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla0"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "andar"
+
+[node name="Tecla1" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla1"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla1/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "W"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "pular"
+
+[node name="Tecla2" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla2/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "C"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "chutar"
+
+[node name="Tecla3" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla3"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla3/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "ESPAÇO"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "carrinho"
+
+[node name="Tecla4" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla4"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla4/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "F"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "super chute"
+
+[node name="Tecla5" type="HBoxContainer" parent="Margem/Coluna/Rodape"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Caixa" type="PanelContainer" parent="Margem/Coluna/Rodape/Tecla5"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_tecla")
+
+[node name="Letra" type="Label" parent="Margem/Coluna/Rodape/Tecla5/Caixa"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "ESC"
+
+[node name="Acao" type="Label" parent="Margem/Coluna/Rodape/Tecla5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "pausar"
+
+[node name="PainelComoJogar" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="Centro" type="CenterContainer" parent="PainelComoJogar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Painel" type="PanelContainer" parent="PainelComoJogar/Centro"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cartao")
+
+[node name="Coluna" type="VBoxContainer" parent="PainelComoJogar/Centro/Painel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Titulo" type="Label" parent="PainelComoJogar/Centro/Painel/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+text = "COMO JOGAR"
+horizontal_alignment = 1
+
+[node name="Colunas" type="HBoxContainer" parent="PainelComoJogar/Centro/Painel/Coluna"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Controles" type="Label" parent="PainelComoJogar/Centro/Painel/Coluna/Colunas"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "CONTROLES
+
+A / D  ou  setas   —  andar
+W  ou  seta cima   —  pular
+C   —  chutar a bola
+ESPAÇO   —  carrinho
+SHIFT + ESPAÇO   —  cabeçada
+F   —  super chute de fogo
+ESC   —  pausar"
+
+[node name="Dicas" type="Label" parent="PainelComoJogar/Centro/Painel/Coluna/Colunas"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "DICAS
+
+• Pule na cabeça dos adversários!
+• Cada chute gasta 1 BOLA: pegue bolas e
+   corações (vida) pelo caminho.
+• Cuidado com o VAR (voa e mergulha), os
+   chinelos do torcedor e o IMPEDIMENTO!
+• Cada adversário derrotado enche o
+   medidor da TORCIDA: cheio, aperte F.
+• Cada lugar tem um DESAFIO: o gol fica
+   trancado até você cumprir.
+• Na final, derrote o CARTÃO VERMELHO!"
+
+[node name="Voltar" type="Button" parent="PainelComoJogar/Centro/Painel/Coluna"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "VOLTAR"
+
+[node name="PainelOpcoes" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="Centro" type="CenterContainer" parent="PainelOpcoes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Painel" type="PanelContainer" parent="PainelOpcoes/Centro"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cartao")
+
+[node name="Coluna" type="VBoxContainer" parent="PainelOpcoes/Centro/Painel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Titulo" type="Label" parent="PainelOpcoes/Centro/Painel/Coluna"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+text = "OPÇÕES"
+horizontal_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="PainelOpcoes/Centro/Painel/Coluna"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "VOLUME"
+horizontal_alignment = 1
+
+[node name="Volume" parent="PainelOpcoes/Centro/Painel/Coluna" instance=ExtResource("10_volume")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VoltarOpcoes" type="Button" parent="PainelOpcoes/Centro/Painel/Coluna"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "VOLTAR"
