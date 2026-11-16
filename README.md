@@ -16,6 +16,8 @@ Leve sua seleção até a taça da Copa do Mundo! Escolha seu uniforme e atraves
 | F | Super chute (com o medidor da torcida cheio) |
 | ESC | Pausar |
 
+No celular e no tablet aparecem botões de toque na tela (andar, pular, chutar, carrinho, cabeçada, super chute e pausa). O jogo é feito para a tela deitada; com o aparelho em pé ele pede para girar. Os botões são criados por `script_controles_toque.gd` e só aparecem em aparelhos com tela de toque.
+
 ## Fases
 
 | Fase | Cenário | Desafio |

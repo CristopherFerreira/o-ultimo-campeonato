@@ -10,6 +10,11 @@ func _ready() -> void:
 	atualizar_torcida(Jogo.empolgacao)
 	%MenuPrincipal.pressed.connect(ir_para_menu)
 
+	# Botões de toque (só aparecem em celular/tablet), por baixo do menu de pausa
+	var toque = preload("res://script_controles_toque.gd").new()
+	$Tela.add_child(toque)
+	$Tela.move_child(toque, $Tela/MenuPausa.get_index())
+
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ui_cancel") and get_parent().get("jogo_acabou") == false):
 		alternar_pausa()

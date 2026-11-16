@@ -993,7 +993,9 @@ C   —  chutar a bola
 ESPAÇO   —  carrinho
 SHIFT + ESPAÇO   —  cabeçada
 F   —  super chute de fogo
-ESC   —  pausar"
+ESC   —  pausar
+
+No celular: botões na tela (deitado)"
 
 [node name="Dicas" type="Label" parent="PainelComoJogar/Centro/Painel/Coluna/Colunas"]
 layout_mode = 2
