@@ -2,6 +2,8 @@
 
 Jogo de plataforma 2D feito na disciplina de Projeto de Sistemas Interativos (UNINOVE, 2026).
 
+**Jogar:** https://cristopherferreira.itch.io/o-ultimo-campeonato (no navegador, no computador ou no celular, com download para Windows e Android)
+
 Leve sua seleção até a taça da Copa do Mundo! Escolha seu uniforme e atravesse seis fases, da várzea ao estádio, enfrentando árbitros que distribuem cartões, bandeirinhas que marcam impedimento, goleiros, o VAR e torcedores rivais. Na grande final, derrote o chefão "Cartão Vermelho" e atravesse os portões do estádio para ser campeão.
 
 ## Controles
