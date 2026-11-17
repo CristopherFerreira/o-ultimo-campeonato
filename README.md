@@ -39,7 +39,8 @@ A cena inicial é `cena_menu.tscn`. O progresso entre as fases fica no autoload 
 
 ## Exportação
 
-O projeto tem dois presets em `export_presets.cfg`:
+O projeto tem três presets em `export_presets.cfg`:
 
-- **Web**: versão para jogar no navegador (itch.io).
+- **Web**: versão para jogar no navegador (itch.io), no computador ou no celular.
 - **Windows**: executável único com o jogo embutido.
+- **Android**: APK assinado (arm64, Android 7.0 ou mais novo). A chave de assinatura não fica no repositório; na exportação ela é informada pelas variáveis `GODOT_ANDROID_KEYSTORE_RELEASE_PATH`, `GODOT_ANDROID_KEYSTORE_RELEASE_USER` e `GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD`.
